@@ -40,10 +40,11 @@ const buildQueryString = (q) => (q ? `?${Object.keys(q)
 class BianAPI extends EventEmitter  {
     constructor(test=false) {
         super();
-        test = true
         this.baseUrl = 'https://fapi.binance.com';
         this.wsUrl = 'wss://fstream.binance.com/ws/';
-        // WSH
+	// -------------------------- CONFIG TEST ---------------------------
+        test = true
+        // -------------------------- CONFIG KEY ------------------------------
         this.apiKey = 'your real key'
         this.apiSec = 'your real sec'
 
