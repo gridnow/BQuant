@@ -8,11 +8,11 @@ js - 币安合约接口封装，包括多空双方的买卖接口，消息推送
 stg_stop - 一个止损策略
 
 ## 使用说明
-nodejs stg_stop/wuxin_trader.js
+nodejs stg_stop/wuxin_trader_stop.js
 
 ## 配置
 1,js/bapi.js 中币安API KEY 的配置，请填上您自己的API KEY 和密码 \
-2,js/bapi.js 中有测试环境和真实环境的配置，如果策略还在开发阶段可以用测试环境的假钱进行验证 \
+2,js/bapi.js 中有测试环境和真实环境的配置，如果策略还在开发阶段可以用测试环境的假钱进行验证
 
 ## 其它
 有任何问题欢迎交流，微信qinmo54 \
