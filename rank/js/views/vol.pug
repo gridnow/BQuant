@@ -1,0 +1,62 @@
+html
+  head
+    title #异常交易排行#{platform}
+    link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css")
+    script(src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous")
+    script(type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js")
+    style.
+      html {
+        background-color: #333;
+        color: #fafafa;
+      }
+
+      body, th, td {
+        color: #fafafa;
+      }
+      h2 {
+        text-align: center;
+        color: red;
+      }
+      h1 {
+        text-align: center;
+      }
+  body
+    h1 #异常交易排行(#{platform})
+    h2 不要冲动,不要贪!!! 防止被平仓.......
+    table(width='80%' id="table_id")
+        thead
+            tr
+                th Symbol
+                th 异常成交量比
+        tbody
+            each val in lists
+              tr
+                td= val.symbol
+                td= val.qr
+
+    audio(src="/sound.wav" autoplay id="audio")
+
+  script(type="text/javascript").
+    $(document).ready( function () {
+      $('#table_id').DataTable({
+        "paging": false,
+        "order": [1, 'desc'],
+      });
+    });
+    $(document).click(() => {
+      let audio = document.getElementById("audio");
+      audio.play();
+    });
+    let lastRunTime = new Date().getMinutes();
+    setInterval(() => {
+      let min = new Date().getMinutes();
+      if (min == 1 || min == 16 || min == 31 || min == 46) {
+        if (lastRunTime === min) {
+          return;
+        }
+
+        lastRunTime = min;
+        
+        window.location.reload();
+      }
+    }, 1000);

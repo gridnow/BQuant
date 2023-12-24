@@ -1,0 +1,48 @@
+html
+  head
+    title #{time}推荐交易#{platform})
+    link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css")
+    script(src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous")
+    script(type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js")
+    style.
+      html {
+        background-color: #333;
+        color: #fafafa;
+      }
+
+      body, th, td {
+        color: #fafafa;
+      }
+      h2 {
+        text-align: center;
+        color: red;
+      }
+      h1 {
+        text-align: center;
+      }
+  body
+    h1 #{time}推荐交易(#{platform})
+    h2 不要冲动,不要贪!!! 防止被平仓.......
+    table(width='80%' id="table_id")
+        thead
+            tr
+                th Symbol
+                th 推荐指令
+        tbody
+            each val in lists
+              tr
+                td= val.symbol
+                td
+                    span= val.tj.side
+                    br
+                    span= val.tj.positionSide
+                    br
+                    span= val.tj.price
+
+  script(type="text/javascript").
+    $(document).ready( function () {
+      $('#table_id').DataTable({
+        "paging": false,
+        "order": [1, 'asc'],
+      });
+    });

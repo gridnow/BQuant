@@ -1,0 +1,57 @@
+html
+  head
+    title #{time}分钟排行榜(#{platform})
+    link(rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css")
+    script(src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous")
+    script(type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js")
+    style.
+      html {
+        background-color: #333;
+        color: #fafafa;
+      }
+
+      body, th, td {
+        color: #fafafa;
+      }
+      h2 {
+        text-align: center;
+        color: red;
+      }
+      h1 {
+        text-align: center;
+      }
+  body
+    h1 #{time}分钟排行榜(#{platform})
+    h2 不要冲动,不要贪!!! 防止被平仓.......
+    table(width='80%' id="table_id")
+        thead
+            tr
+                th Symbol
+                th 上周期涨幅
+                th 当前涨幅
+                th 上周期翻转
+                th 当前翻转
+                th 横盘指标
+        tbody
+            each val in lists
+              tr
+                td= val.symbol
+                td= val.rise1
+                td= val.rise0
+                td
+                    span= val.revert1.name
+                    br
+                    span= val.revert1.score
+                td
+                    span= val.revert0.name
+                    br
+                    span= val.revert0.score
+                td= val.hpscore
+
+  script(type="text/javascript").
+    $(document).ready( function () {
+      $('#table_id').DataTable({
+        "paging": false,
+        "order": [1, 'asc'],
+      });
+    });
