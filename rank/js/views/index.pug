@@ -29,24 +29,14 @@ html
                 th Symbol
                 th 上周期涨幅
                 th 当前涨幅
-                th 上周期翻转
-                th 当前翻转
-                th 横盘指标
+             
         tbody
             each val in lists
               tr
                 td= val.symbol
                 td= val.rise1
                 td= val.rise0
-                td
-                    span= val.revert1.name
-                    br
-                    span= val.revert1.score
-                td
-                    span= val.revert0.name
-                    br
-                    span= val.revert0.score
-                td= val.hpscore
+                
 
   script(type="text/javascript").
     $(document).ready( function () {

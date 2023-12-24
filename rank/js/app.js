@@ -137,19 +137,7 @@ app.get('/blist', async (req, res) => {
       let rise1 = Math.round(rise_list[rise_list.length - 2] * 10000) / 100;
       let rise0 = Math.round(rise_list[rise_list.length - 1] * 10000) / 100;
 
-      let kline1 = subkline[subkline.length - 2];
-      if ((!kline1) || (!kline1[0])) {
-        continue;
-      }
-
-      let kline0 = subkline[subkline.length - 1];
-
-      let revert1 = ta.matchRevert(parseFloat(kline1[1]), parseFloat(kline1[4]), parseFloat(kline1[2]), parseFloat(kline1[3]));
-      let revert0 = ta.matchRevert(parseFloat(kline0[1]), parseFloat(kline0[4]), parseFloat(kline0[2]), parseFloat(kline0[3]));
-  
-      let hp = ta.testHP(subkline.slice(subkline.length - hpParam).map(r => parseFloat(r[4])), hpParam);
-
-      k.push({symbol, rise1, rise0, revert1, revert0, hpscore: hp.toFixed(3), close: kline0[4], quantityPrecision: _k.quantityPrecision, pricePrecision: _k.pricePrecision});
+      k.push({symbol, rise1, rise0, quantityPrecision: _k.quantityPrecision, pricePrecision: _k.pricePrecision});
     }
   }catch(e) {
     console.log("api call bapi error ", e)
@@ -169,8 +157,6 @@ app.get('/blist', async (req, res) => {
   } else {
     res.render('index', {platform: 'Bian', lists: k, time: granularity});
   }
-  
-  
 })
 
 app.get('/btj', async (req, res) => {
