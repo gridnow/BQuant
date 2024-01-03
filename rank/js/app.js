@@ -88,6 +88,17 @@ function calc_rise_b(klinedata) {
   }
   return ret
 }
+function calc_vol_rise_b(klinedata) {
+  let ret = []
+  for (let i = 1; i < klinedata.length; i++) {
+    let pc = klinedata[i - 1][5];
+    let c = klinedata[i][5];
+
+    ret.push( (c - pc) / pc);
+  }
+  return ret
+}
+
 
 app.get('/blist', async (req, res) => {
   let granularity = req.query.time || '15m';
@@ -136,8 +147,11 @@ app.get('/blist', async (req, res) => {
       let rise_list = calc_rise_b(subkline);
       let rise1 = Math.round(rise_list[rise_list.length - 2] * 10000) / 100;
       let rise0 = Math.round(rise_list[rise_list.length - 1] * 10000) / 100;
-
-      k.push({symbol, rise1, rise0, quantityPrecision: _k.quantityPrecision, pricePrecision: _k.pricePrecision});
+      // 成交量
+      let vol_rise_list = calc_vol_rise_b(subkline);
+      let volRise0 = Math.round(vol_rise_list[vol_rise_list.length - 1] * 10000) / 100;
+      let volRise1 = Math.round(vol_rise_list[vol_rise_list.length - 2] * 10000) / 100;
+      k.push({symbol, rise1, rise0, volRise1, volRise0, quantityPrecision: _k.quantityPrecision, pricePrecision: _k.pricePrecision});
     }
   }catch(e) {
     console.log("api call bapi error ", e)

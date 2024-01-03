@@ -29,13 +29,17 @@ html
                 th Symbol
                 th 上周期涨幅
                 th 当前涨幅
-             
+                th 上周期成交量涨幅
+                th 成交量涨幅
+
         tbody
             each val in lists
               tr
                 td= val.symbol
                 td= val.rise1
                 td= val.rise0
+                td= val.volRise1
+                td= val.volRise0
                 
 
   script(type="text/javascript").
